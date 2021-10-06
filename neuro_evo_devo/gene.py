@@ -15,8 +15,19 @@ class Gene:
         for v in self.parameters.values():
             v.mutate()
 
-    @staticmethod
-    def create_cell_type_gene():
+
+class GeneralGene(Gene):
+    def __init__(self):
+        parameters = {
+            # gene selection
+            "max_divisions": Parameter(min=0),
+        }
+        super().__init__(parameters, .0)
+        return self
+
+
+class CellGene(Gene):
+    def __init__(self):
         parameters = {
             # gene selection
             "alpha": Parameter(),
@@ -35,12 +46,5 @@ class Gene:
             # neuron
             "neuron_bias": Parameter()
         }
-        return Gene(parameters, .001)
-
-    @staticmethod
-    def create_general_gene():
-        parameters = {
-            # gene selection
-            "max_divisions": Parameter(min=0),
-        }
-        return Gene(parameters, 0)
+        super().__init__(parameters, .001)
+        return self
