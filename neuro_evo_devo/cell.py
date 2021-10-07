@@ -50,20 +50,20 @@ class Cell:
 
     def divide(self):
         p = self.active_gene.parameters
-        xs = [c.x for c in self.inputs.keys()]
-        ys = [c.y for c in self.inputs.keys()]
+        # xs = [c.x for c in self.inputs.keys()]
+        # ys = [c.y for c in self.inputs.keys()]
         x_score = (
-            statistics.pstdev(xs) * p["xy_weight_std"] +
+            # statistics.pstdev(xs) * p["xy_weight_std"] +
             self.width_x * p["xy_weight_width"] +
             p["xy_bias"]
         )
         y_score = (
-            statistics.pstdev(ys) * p["xy_weight_std"] +
+            # statistics.pstdev(ys) * p["xy_weight_std"] +
             self.width_y * p["xy_weight_width"] +
             p["xy_bias"]
         )
         z_score = (
-            len(self.inputs) * p["z_weight_count"] +
+            # len(self.inputs) * p["z_weight_count"] +
             self.width_z * p["z_weight_width"] +
             p["z_bias"]
         )

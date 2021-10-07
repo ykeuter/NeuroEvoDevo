@@ -40,10 +40,10 @@ class CellGene(Gene):
             # split
             "xy_bias": Parameter(),
             "z_bias": Parameter(),
-            "xy_weight_std": Parameter(),
+            # "xy_weight_std": Parameter(),
             # "xy_weight_weight": Parameter(),
             "xy_weight_width": Parameter(),
-            "z_weight_count": Parameter(),
+            # "z_weight_count": Parameter(),
             "z_weight_width": Parameter(),
             "xy_slope_inputs": Parameter(),
             "xy_slope_outputs": Parameter(),
