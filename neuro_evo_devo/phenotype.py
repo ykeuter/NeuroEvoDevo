@@ -5,17 +5,15 @@ from collections import deque
 class Phenotype:
     def __init__(self, input_coords, output_coords, genome):
         self.genome = genome
-        self.input_coords = input_coords
-        self.output_coords = output_coords
         egg = Cell(0, 0, 1, 1, 1, {}, {}, genome)
-        self.inputs = {
+        self.inputs = [
             Cell(x, y, 0, 0, 0, {}, {egg: 1}, None) for x, y in input_coords
-        }
-        self.outputs = {
+        ]
+        self.outputs = [
             Cell(x, y, 0, 0, 0, {egg: 1}, {}, None) for x, y in output_coords
-        }
-        egg.inputs = self.inputs
-        egg.outputs = self.outputs
+        ]
+        egg.inputs = {c: 1 for c in self.inputs}
+        egg.outputs = {c: 1 for c in self.outputs}
         self.develop(egg)
         return self
 
