@@ -13,10 +13,13 @@ class Population:
 
     def run(self, eval_function, n):
         num_survivors = math.ceil(len(self.genomes) * self.survival_rate)
-        for _ in range(n):
+        for i in range(n):
             fitnesses = eval_function(self.genomes)
             fitnesses = [(f, g) for f, g in zip(fitnesses, self.genomes)]
             fitnesses.sort(key=lambda t: t[0], reverse=True)
+            print("gen: {} | max: {} | min: {} | | avg: {}".format(
+                i, max(fitnesses), min(fitnesses),
+                sum(fitnesses) / len(self.genomes)))
             survivors = [g for _, g in fitnesses[:num_survivors]]
             self.generate_offspring(survivors)
 
@@ -25,4 +28,3 @@ class Population:
             random.choice(survivors).copy().mutate()
             for _ in self.genomes
         ]
-
