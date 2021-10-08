@@ -28,10 +28,10 @@ class Cell:
             if not isinstance(g, CellGene):
                 continue
             score = (
-                g.parameters["weight_alpha"] * alpha +
-                g.parameters["weight_beta"] * beta +
-                g.parameters["weight_gamma"] * gamma +
-                g.parameters["gene_bias"]
+                g.parameters["weight_alpha"].value * alpha +
+                g.parameters["weight_beta"].value * beta +
+                g.parameters["weight_gamma"].value * gamma +
+                g.parameters["gene_bias"].value
             )
             if score > best_score:
                 best_score = score
@@ -42,9 +42,9 @@ class Cell:
         for c, w in self.inputs.items():
             if c.active_gene is None:
                 continue
-            alpha += w * c.active_gene.parameters["alpha"]
-            beta += w * c.active_gene.parameters["beta"]
-            gamma += w * c.active_gene.parameters["gamma"]
+            alpha += w * c.active_gene.parameters["alpha"].value
+            beta += w * c.active_gene.parameters["beta"].value
+            gamma += w * c.active_gene.parameters["gamma"].value
         return alpha, beta, gamma
 
     def divide(self):
@@ -53,18 +53,18 @@ class Cell:
         # ys = [c.y for c in self.inputs.keys()]
         x_score = (
             # statistics.pstdev(xs) * p["xy_weight_std"] +
-            self.width_x * p["xy_weight_width"] +
-            p["xy_bias"]
+            self.width_x * p["xy_weight_width"].value +
+            p["xy_bias"].value
         )
         y_score = (
             # statistics.pstdev(ys) * p["xy_weight_std"] +
-            self.width_y * p["xy_weight_width"] +
-            p["xy_bias"]
+            self.width_y * p["xy_weight_width"].value +
+            p["xy_bias"].value
         )
         z_score = (
             # len(self.inputs) * p["z_weight_count"] +
-            self.width_z * p["z_weight_width"] +
-            p["z_bias"]
+            self.width_z * p["z_weight_width"].value +
+            p["z_bias"].value
         )
         max_score = max(x_score, y_score, z_score)
         if max_score < 0:
@@ -112,7 +112,7 @@ class Cell:
             c.inputs[cell2] = v
 
     def split_io(self, x_or_y, in_or_out):
-        slope = self.active_gene.parameters["xy_slope_" + in_or_out]
+        slope = self.active_gene.parameters["xy_slope_" + in_or_out].value
         io = getattr(self, in_or_out)
         xy = {c: getattr(c, x_or_y) for c in io}
         m = statistics.mean(xy.values())

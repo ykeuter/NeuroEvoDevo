@@ -17,7 +17,7 @@ class Phenotype:
         self.develop(egg)
 
     def develop(self, egg):
-        max_divisions = self.genome.genes[0].parameters["max_divisions"]
+        max_divisions = self.genome.genes[0].parameters["max_divisions"].value
         num_divisions = 0
         idle = 0
         q = deque([egg])

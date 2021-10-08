@@ -26,9 +26,8 @@ class NeuralNet:
     def activate(self, input_values):
         values = {c: v for c, v in zip(self.phenotype.inputs, input_values)}
         for c in self.eval_order:
-            values[c] = math.tanh(
-                sum(
-                    values[i] * w for i, w in c.inputs.items()
-                ) * 2.5
-            )
+            s = sum(values[i] * w for i, w in c.inputs.items())
+            if c.active_gene is not None:
+                s += c.active_gene.parameters["bias"].value
+            values[c] = math.tanh(s * 2.5)
         return [values[c] for c in self.phenotype.outputs]
