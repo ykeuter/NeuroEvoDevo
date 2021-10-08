@@ -1,7 +1,7 @@
 import math
 import statistics
 
-from gene import CellGene
+from .gene import CellGene
 
 
 class Cell:

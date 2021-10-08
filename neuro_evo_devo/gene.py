@@ -1,4 +1,4 @@
-from parameter import Parameter
+from .parameter import Parameter
 
 
 class Gene:

@@ -1,5 +1,5 @@
 import random
-from gene import GeneralGene, CellGene
+from .gene import GeneralGene, CellGene
 
 
 class Genome:
