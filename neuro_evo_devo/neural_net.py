@@ -7,7 +7,6 @@ class NeuralNet:
         # what abt bias in output?
         self.phenotype = phenotype
         self.eval_order = self.get_eval_order()
-        return self
 
     def get_eval_order(self):
         ordered_cells = []

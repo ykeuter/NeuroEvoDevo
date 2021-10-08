@@ -15,7 +15,6 @@ class Phenotype:
         egg.inputs = {c: 1 for c in self.inputs}
         egg.outputs = {c: 1 for c in self.outputs}
         self.develop(egg)
-        return self
 
     def develop(self, egg):
         max_divisions = self.genome.genes[0].parameters["max_divisions"]

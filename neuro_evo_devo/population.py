@@ -9,7 +9,6 @@ class Population:
             Genome.create_default() for _ in range(size)
         ]
         self.survival_rate = survival_rate
-        return self
 
     def run(self, eval_function, n):
         num_survivors = math.ceil(len(self.genomes) * self.survival_rate)

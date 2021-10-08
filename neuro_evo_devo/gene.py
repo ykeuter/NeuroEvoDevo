@@ -5,7 +5,6 @@ class Gene:
     def __init__(self, parameters, rate):
         self.parameters = parameters
         self.rate = rate
-        return self
 
     def copy(self):
         parameters = {k: v.copy() for k, v in self.parameters.items()}
@@ -23,7 +22,6 @@ class GeneralGene(Gene):
             "max_divisions": Parameter(min=0),
         }
         super().__init__(parameters, .0)
-        return self
 
 
 class CellGene(Gene):
@@ -51,4 +49,3 @@ class CellGene(Gene):
             "neuron_bias": Parameter()
         }
         super().__init__(parameters, .001)
-        return self

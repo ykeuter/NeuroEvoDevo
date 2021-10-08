@@ -19,7 +19,6 @@ class Cell:
             self.active_gene = self.select_gene()
         else:
             self.active_gene = None
-        return self
 
     def select_gene(self):
         self.active_gene = None
