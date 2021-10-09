@@ -9,7 +9,7 @@ class Gene:
 
     def copy(self):
         parameters = {k: v.copy() for k, v in self.parameters.items()}
-        return Gene(parameters, self.rate)
+        return Gene(parameters, self.rate, self.type)
 
     def mutate(self):
         for v in self.parameters.values():
