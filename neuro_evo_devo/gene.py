@@ -21,7 +21,7 @@ class Gene:
             # gene selection
             "max_divisions": Parameter(min=0),
         }
-        Gene(parameters, .0, "general")
+        return Gene(parameters, .0, "general")
 
     @staticmethod
     def create_cell_gene():
@@ -47,4 +47,4 @@ class Gene:
             # neuron
             "neuron_bias": Parameter()
         }
-        Gene(parameters, .001, "cell")
+        return Gene(parameters, .001, "cell")
