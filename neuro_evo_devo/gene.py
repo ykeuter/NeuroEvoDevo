@@ -2,9 +2,10 @@ from .parameter import Parameter
 
 
 class Gene:
-    def __init__(self, parameters, rate):
+    def __init__(self, parameters, rate, type):
         self.parameters = parameters
         self.rate = rate
+        self.type = type
 
     def copy(self):
         parameters = {k: v.copy() for k, v in self.parameters.items()}
@@ -14,18 +15,16 @@ class Gene:
         for v in self.parameters.values():
             v.mutate()
 
-
-class GeneralGene(Gene):
-    def __init__(self):
+    @staticmethod
+    def create_general_gene():
         parameters = {
             # gene selection
             "max_divisions": Parameter(min=0),
         }
-        super().__init__(parameters, .0)
+        Gene(parameters, .0, "general")
 
-
-class CellGene(Gene):
-    def __init__(self):
+    @staticmethod
+    def create_cell_gene():
         parameters = {
             # gene selection
             "alpha": Parameter(),
@@ -48,4 +47,4 @@ class CellGene(Gene):
             # neuron
             "neuron_bias": Parameter()
         }
-        super().__init__(parameters, .001)
+        Gene(parameters, .001, "cell")

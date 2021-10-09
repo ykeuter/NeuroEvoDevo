@@ -1,8 +1,6 @@
 import math
 import statistics
 
-from .gene import CellGene
-
 
 class Cell:
     def __init__(self, x, y, width_x, width_y, width_z,
@@ -15,17 +13,16 @@ class Cell:
         self.inputs = inputs  # {cell: weight}
         self.outputs = outputs  # {cell: weight}
         self.genome = genome
-        if genome is not None:
-            self.active_gene = self.select_gene()
-        else:
-            self.active_gene = None
+        self.active_gene = self.select_active_gene()
 
-    def select_gene(self):
-        self.active_gene = None
+    def select_active_gene(self):
+        if self.genome is None:
+            return None
+        active_gene = None
         best_score = -math.inf
         alpha, beta, gamma = self.get_greeks()
         for g in self.genome.genes:
-            if not isinstance(g, CellGene):
+            if g.type != "cell":
                 continue
             score = (
                 g.parameters["weight_alpha"].value * alpha +
@@ -35,7 +32,8 @@ class Cell:
             )
             if score > best_score:
                 best_score = score
-                self.active_gene = g
+                active_gene = g
+        return active_gene
 
     def get_greeks(self):
         alpha, beta, gamma = 0, 0, 0
@@ -118,8 +116,8 @@ class Cell:
         m = statistics.mean(xy.values())
         io1 = {c: max(0, min(1, (v - m) * slope + .5)) for c, v in xy.items()}
         io2 = {c: 1 - w for c, w in io1.items()}
-        io1 = {c: w * io[c] for c, w in io1 if w != 0}
-        io2 = {c: w * io[c] for c, w in io2 if w != 0}
+        io1 = {c: w * io[c] for c, w in io1.items() if w != 0}
+        io2 = {c: w * io[c] for c, w in io2.items() if w != 0}
         return io1, io2
 
     def split_xy(self, x_or_y):

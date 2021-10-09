@@ -1,5 +1,5 @@
 import random
-from .gene import GeneralGene, CellGene
+from .gene import Gene
 
 
 class Genome:
@@ -19,8 +19,9 @@ class Genome:
                 new_genes.append(extra_gene)
             g.mutate()
             new_genes.append(g)
+        self.genes = new_genes
 
     @staticmethod
     def create_default():
-        genes = [GeneralGene(), CellGene()]
+        genes = [Gene.create_general_gene(), Gene.create_cell_gene()]
         return Genome(genes)
