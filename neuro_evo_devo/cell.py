@@ -39,10 +39,13 @@ class Cell:
         alpha, beta, gamma = 0, 0, 0
         for c, w in self.inputs.items():
             if c.active_gene is None:
-                continue
-            alpha += w * c.active_gene.parameters["alpha"].value
-            beta += w * c.active_gene.parameters["beta"].value
-            gamma += w * c.active_gene.parameters["gamma"].value
+                alpha += c.x
+                beta += c.y
+                gamma += math.sqrt(c.x * c.x + c.y * c.y)
+            else:
+                alpha += w * c.active_gene.parameters["alpha"].value
+                beta += w * c.active_gene.parameters["beta"].value
+                gamma += w * c.active_gene.parameters["gamma"].value
         return alpha, beta, gamma
 
     def divide(self):
