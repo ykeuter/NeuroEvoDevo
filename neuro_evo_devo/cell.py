@@ -110,7 +110,8 @@ class Cell:
             c.inputs[cell2] = v
 
     def split_io(self, x_or_y, in_or_out):
-        slope = self.active_gene.parameters["xy_slope_" + in_or_out].value
+        slope = self.active_gene.parameters["xy_slope_" + in_or_out].value / \
+            getattr(self, "width_" + x_or_y)
         io = getattr(self, in_or_out)
         xy = {c: getattr(c, x_or_y) for c in io}
         m = statistics.mean(xy.values())

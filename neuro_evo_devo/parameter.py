@@ -4,7 +4,7 @@ import math
 
 class Parameter:
     def __init__(self, mean=0, std=1, min=-math.inf, max=math.inf,
-                 rate=.01, power=.05):
+                 rate=.1, power=.01):
         self.value = random.gauss(mean, std)
         self.min = min
         self.max = max
