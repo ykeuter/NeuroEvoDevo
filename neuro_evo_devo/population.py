@@ -14,9 +14,6 @@ class Population:
         num_survivors = math.ceil(len(self.genomes) * self.survival_rate)
         for i in range(n):
             fitnesses = eval_function(self.genomes)
-            print("gen: {} | max: {} | min: {} | avg: {}".format(
-                i, max(fitnesses), min(fitnesses),
-                sum(fitnesses) / len(self.genomes)))
             fitnesses = [(f, g) for f, g in zip(fitnesses, self.genomes)]
             fitnesses.sort(key=lambda t: t[0], reverse=True)
             survivors = [g for _, g in fitnesses[:num_survivors]]
